@@ -2,11 +2,38 @@
   "name": "svgstore",
   "version": "3.0.1",
   "description": "Combines mulitple svg files into one.",
-  "scripts": {
-    "lint": "npx eslint --fix \"{src,test}/**/*.js\" && npx prettier --write \"{src,test}/**/*.js\"",
-    "test": "node test/svgstore.js",
-    "cover": "npx c8 npm test"
+  "author": "Jayson Wu <jaysonwu991@outlook.com>",
+  "license": "MIT",
+  "main": "src/svgstore.js",
+  "engines": {
+    "node": ">= 12"
   },
+  "scripts": {
+    "lint": "eslint --fix \"{src,test}/**/*.ts\" && prettier --write \"{src,test}/**/*.ts\"",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "test:coverage:report:html": "npx c8 report --reporter=html",
+    "test:coverage:report:text": "npx c8 report --reporter=text"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.35",
+    "@types/jquery": "^3.5.32",
+    "@types/node": "^22.15.3",
+    "@typescript-eslint/eslint-plugin": "^8.31.1",
+    "@typescript-eslint/parser": "^8.31.1",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.3.1",
+    "globals": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2"
+  },
+  "homepage": "https://github.com/jaysonwu991/svgstore#readme",
+  "repository": "jaysonwu991/svgstore",
   "keywords": [
     "concat",
     "join",
@@ -19,40 +46,5 @@
     "svgstore",
     "symbol",
     "symbols"
-  ],
-  "author": "Shannon Moeller <me@shannonmoeller.com> (http://shannonmoeller.com)",
-  "maintainers": [
-    {
-      "name": "Shannon Moeller",
-      "email": "me@shannonmoeller.com",
-      "url": "https://github.com/shannonmoeller"
-    },
-    {
-      "name": "Brian Sipple",
-      "email": "bsipple57@gmail.com",
-      "url": "https://github.com/BrianSipple"
-    }
-  ],
-  "homepage": "https://github.com/svgstore/svgstore#readme",
-  "repository": "svgstore/svgstore",
-  "license": "MIT",
-  "main": "src/svgstore.js",
-  "dependencies": {
-    "cheerio": "v1.0.0-rc.10"
-  },
-  "engines": {
-    "node": ">= 12"
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "env": {
-      "node": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 8
-    }
-  },
-  "prettier": {
-    "singleQuote": true
-  }
+  ]
 }
