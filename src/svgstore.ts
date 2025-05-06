@@ -17,13 +17,17 @@ const DEFAULT_OPTIONS = {
   cleanDefs: false,
   cleanSymbols: false,
   inline: false,
-  svgAttrs: false as Record<string, string | ((currentValue: string | undefined) => string)> | false,
-  symbolAttrs: false as Record<string, string | ((currentValue: string | undefined) => string)> | false,
+  svgAttrs: false as
+    | Record<string, string | ((currentValue: string | undefined) => string)>
+    | false,
+  symbolAttrs: false as
+    | Record<string, string | ((currentValue: string | undefined) => string)>
+    | false,
   copyAttrs: false,
   renameDefs: false,
 };
 
-function svgstore(options?: Record<string, any>) {
+function svgstore(options?: Partial<typeof DEFAULT_OPTIONS>) {
   const svgstoreOptions = { ...DEFAULT_OPTIONS, ...options };
 
   const parent = loadXml(TEMPLATE_SVG);
@@ -42,7 +46,9 @@ function svgstore(options?: Record<string, any>) {
         // Update <use> tags
         child('use').each((_i, use) => {
           const hrefLink = `#${oldDefId}`;
-          const property = ['xlink:href', 'href'].find((prop) => child(use).prop(prop) === hrefLink);
+          const property = ['xlink:href', 'href'].find(
+            (prop) => child(use).prop(prop) === hrefLink
+          );
           if (property) child(use).attr(property, `#${newDefId}`);
         });
 
@@ -56,7 +62,7 @@ function svgstore(options?: Record<string, any>) {
   return {
     element: parent,
 
-    add(id: string, file: string, options?: Record<string, any>) {
+    add(id: string, file: string, options?: Record<string, unknown>) {
       const child = loadXml(file);
       const addOptions = { ...svgstoreOptions, ...options };
 
@@ -85,7 +91,7 @@ function svgstore(options?: Record<string, any>) {
       return this;
     },
 
-    toString(options: Record<string, any>) {
+    toString(options: Record<string, unknown>) {
       const clone = loadXml(parent.xml());
       const toStringOptions = { ...svgstoreOptions, ...options };
       const svg = clone(SELECTOR_SVG);

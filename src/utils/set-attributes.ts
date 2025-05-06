@@ -8,8 +8,7 @@ const setAttributes = (
   if (!attrs || typeof attrs !== 'object') return el;
 
   for (const [attr, value] of Object.entries(attrs)) {
-    const newValue =
-      typeof value === 'function' ? value(el.attr(attr)) : value;
+    const newValue = typeof value === 'function' ? value(el.attr(attr)) : value;
     el.attr(attr, newValue);
   }
 

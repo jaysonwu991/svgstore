@@ -6,7 +6,7 @@ const ALWAYS_COPY_ATTRS = ['viewBox', 'aria-labelledby', 'role'];
 const copyAttributes = (
   a: { attr: (name: string, value?: string) => void },
   b: { attr: (name: string) => string | null },
-  attrs: string[],
+  attrs: string[]
 ) => {
   const attrsToCopy = [...ALWAYS_COPY_ATTRS, ...attrs];
   const copiedAttrs = new Set<string>();

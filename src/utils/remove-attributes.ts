@@ -3,27 +3,27 @@
  * child nodes of a given node.
  */
 const removeAttributes = (el: JQuery<HTMLElement>, attrs: string[] | boolean) => {
-	let localAttrs = attrs;
+  let localAttrs = attrs;
 
-	if (localAttrs === true) {
-		localAttrs = ['style'];
-	}
+  if (localAttrs === true) {
+    localAttrs = ['style'];
+  }
 
-	if (!localAttrs || !localAttrs.length) {
-		return el;
-	}
+  if (!localAttrs || !localAttrs.length) {
+    return el;
+  }
 
-	const els = el.find('*');
+  const els = el.find('*');
 
-	els.each(function (i: number) {
-		if (Array.isArray(localAttrs)) {
-			localAttrs.forEach(function (attr: string) {
-				els.eq(i).removeAttr(attr);
-			});
-		}
-	});
+  els.each(function (i: number) {
+    if (Array.isArray(localAttrs)) {
+      localAttrs.forEach(function (attr: string) {
+        els.eq(i).removeAttr(attr);
+      });
+    }
+  });
 
-	return el;
-}
+  return el;
+};
 
 export default removeAttributes;
