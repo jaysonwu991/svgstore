@@ -5,7 +5,7 @@
   "author": "Jayson Wu <jaysonwu991@outlook.com>",
   "license": "MIT",
   "engines": {
-    "node": ">= 20"
+    "node": ">= 18"
   },
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
