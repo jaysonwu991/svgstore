@@ -19,7 +19,6 @@ jobs:
         node-version:
           - 22
           - 20
-          - 18
         os:
           - ubuntu-latest
           - macos-latest
