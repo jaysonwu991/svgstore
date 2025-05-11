@@ -40,7 +40,7 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['**/node_modules/**', '**/lib/**', '**/www/**'],
+    ignores: ['**/node_modules/**', '**/lib/**', '**/build-config/**'],
   },
   {
     languageOptions: {

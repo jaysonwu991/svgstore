@@ -2,7 +2,7 @@
  * Utility to remove specific attributes from all
  * child nodes of a given node.
  */
-const removeAttributes = (el: JQuery<HTMLElement>, attrs: string[] | boolean) => {
+const removeAttributes = (el: cheerio.Cheerio, attrs: string[] | boolean) => {
   let localAttrs = attrs;
 
   if (localAttrs === true) {
