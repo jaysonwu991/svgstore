@@ -5,6 +5,10 @@ on:
   - pull_request
   - workflow_dispatch
 
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     name: Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
@@ -21,9 +25,15 @@ jobs:
           - macos-latest
           - windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
-      - run: npm run test:watch
+
+      - name: Install dependencies and run tests
+        run: |
+          npm i
+          npm test
