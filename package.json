@@ -7,23 +7,22 @@
   "engines": {
     "node": ">= 20"
   },
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "unpkg": "lib/umd/index.js",
+  "main": "lib/cjs/src/index.js",
+  "module": "lib/esm/src/index.js",
+  "unpkg": "lib/umd/src/index.js",
   "types": "lib/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./lib/types/index.d.ts",
-      "require": "./lib/cjs/index.js",
-      "import": "./lib/esm/index.js",
-      "default": "./lib/cjs/index.js"
+      "require": "./lib/cjs/src/index.js",
+      "import": "./lib/esm/src/index.js",
+      "default": "./lib/cjs/src/index.js"
     },
     "./package.json": "./package.json",
     "./lib/types/index.d.ts": "./lib/types/index.d.ts"
   },
   "files": [
     "lib",
-    "build-config",
     "package.json",
     "README.md"
   ],
