@@ -32,7 +32,7 @@
     "build:esm": "swc src -d lib/esm --delete-dir-on-start --no-swcrc --config-file build-config/.esm-swcrc",
     "build:cjs": "swc src -d lib/cjs --delete-dir-on-start --no-swcrc --config-file build-config/.cjs-swcrc",
     "build:umd": "swc src -d lib/umd --delete-dir-on-start --no-swcrc --config-file build-config/.umd-swcrc",
-    "build:types": "tsc src/**/*.ts --declaration --emitDeclarationOnly --outFile lib/types/index.d.ts",
+    "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outFile lib/types/index.d.ts",
     "lint": "eslint --fix src test && prettier --write \"{src,test}/**/*.ts\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"

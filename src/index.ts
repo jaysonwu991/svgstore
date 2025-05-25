@@ -1,4 +1,9 @@
-import { copyAttributes, loadXml, removeAttributes, setAttributes, svgToSymbol } from './utils';
+import loadXml from './load-xml';
+import svgToSymbol from './svg-to-symbol';
+import setAttributes from './set-attributes';
+import copyAttributes from './copy-attributes';
+import removeAttributes from './remove-attributes';
+import renameDefinitions from './rename-definitions';
 
 const SELECTOR_SVG = 'svg';
 const SELECTOR_DEFS = 'defs';
@@ -35,37 +40,14 @@ class SVGStore {
   private parent: cheerio.Root;
   private parentSvg: cheerio.Cheerio;
   private parentDefs: cheerio.Cheerio;
+  private renameDefs: (id: string, child: cheerio.Root) => void;
 
   constructor(options?: Partial<typeof DEFAULT_OPTIONS>) {
     this.options = { ...DEFAULT_OPTIONS, ...options };
     this.parent = loadXml(TEMPLATE_SVG);
     this.parentSvg = this.parent(SELECTOR_SVG);
     this.parentDefs = this.parent(SELECTOR_DEFS);
-  }
-
-  private renameDefs(id: string, child: cheerio.Root) {
-    child(SELECTOR_DEFS)
-      .children()
-      .each((_i, elem) => {
-        const element = child(elem);
-        const oldDefId = element.attr('id');
-        const newDefId = `${id}_${oldDefId}`;
-        element.attr('id', newDefId);
-
-        // Update <use> tags
-        child('use').each((_i, use) => {
-          const hrefLink = `#${oldDefId}`;
-          const property = ['xlink:href', 'href'].find(
-            (prop) => child(use).prop(prop) === hrefLink
-          );
-          if (property) child(use).attr(property, `#${newDefId}`);
-        });
-
-        // Update fill attributes
-        child(`[fill="url(#${oldDefId})"]`).each((_i, use) => {
-          child(use).attr('fill', `url(#${newDefId})`);
-        });
-      });
+    this.renameDefs = renameDefinitions;
   }
 
   add(id: string, file: string, options?: Record<string, unknown>) {
