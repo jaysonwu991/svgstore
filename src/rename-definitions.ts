@@ -1,6 +1,8 @@
+import type { CheerioAPI } from 'cheerio';
+
 const SELECTOR_DEFS = 'defs';
 
-const renameDefinitions = (id: string, child: cheerio.Root) => {
+const renameDefinitions = (id: string, child: CheerioAPI) => {
   child(SELECTOR_DEFS)
     .children()
     .each((_i, elem) => {

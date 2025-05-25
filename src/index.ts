@@ -4,6 +4,8 @@ import setAttributes from './set-attributes';
 import copyAttributes from './copy-attributes';
 import removeAttributes from './remove-attributes';
 import renameDefinitions from './rename-definitions';
+import type { Cheerio, CheerioAPI } from 'cheerio';
+import type { Element } from 'domhandler';
 
 const SELECTOR_SVG = 'svg';
 const SELECTOR_DEFS = 'defs';
@@ -37,10 +39,10 @@ const DEFAULT_OPTIONS = {
 
 class SVGStore {
   private options: typeof DEFAULT_OPTIONS;
-  private parent: cheerio.Root;
-  private parentSvg: cheerio.Cheerio;
-  private parentDefs: cheerio.Cheerio;
-  private renameDefs: (id: string, child: cheerio.Root) => void;
+  private parent: CheerioAPI;
+  private parentSvg: Cheerio<Element>;
+  private parentDefs: Cheerio<Element>;
+  private renameDefs: (id: string, child: CheerioAPI) => void;
 
   constructor(options?: Partial<typeof DEFAULT_OPTIONS>) {
     this.options = { ...DEFAULT_OPTIONS, ...options };
@@ -88,8 +90,8 @@ class SVGStore {
 
     if (toStringOptions.inline) return clone.xml();
 
-    svg.attr('xmlns', (val) => val || 'http://www.w3.org/2000/svg');
-    svg.attr('xmlns:xlink', (val) => val || 'http://www.w3.org/1999/xlink');
+    svg.attr('xmlns', (_i, val) => val || 'http://www.w3.org/2000/svg');
+    svg.attr('xmlns:xlink', (_i, val) => val || 'http://www.w3.org/1999/xlink');
 
     return TEMPLATE_DOCTYPE + clone.xml();
   }

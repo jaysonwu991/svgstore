@@ -29,32 +29,32 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build:esm": "swc src -d lib/esm --delete-dir-on-start --no-swcrc --config-file build-config/.esm-swcrc",
-    "build:cjs": "swc src -d lib/cjs --delete-dir-on-start --no-swcrc --config-file build-config/.cjs-swcrc",
-    "build:umd": "swc src -d lib/umd --delete-dir-on-start --no-swcrc --config-file build-config/.umd-swcrc",
+    "build:cjs": "swc src -d lib/cjs --delete-dir-on-start --config module.type=commonjs",
+    "build:esm": "swc src -d lib/esm --delete-dir-on-start --config module.type=es6",
+    "build:umd": "swc src -d lib/umd --delete-dir-on-start --config module.type=umd",
     "build:types": "tsc src/*.ts --declaration --emitDeclarationOnly --outFile lib/types/index.d.ts",
     "lint": "eslint --fix src test && prettier --write \"{src,test}/**/*.ts\"",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "cheerio": "^1.0.0"
+    "cheerio": "^1.0.0",
+    "domhandler": "^5.0.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
-    "@swc/cli": "^0.7.5",
-    "@swc/core": "^1.11.24",
-    "@types/cheerio": "^0.22.35",
-    "@types/node": "^22.15.3",
-    "@vitest/coverage-v8": "3.1.2",
-    "eslint": "^9.26.0",
-    "eslint-config-prettier": "^10.1.2",
-    "eslint-plugin-prettier": "^5.3.1",
-    "globals": "^16.0.0",
+    "@eslint/js": "^9.27.0",
+    "@swc/cli": "^0.7.7",
+    "@swc/core": "^1.11.29",
+    "@types/node": "^22.15.21",
+    "@vitest/coverage-v8": "^3.1.4",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "globals": "^16.2.0",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.32.0",
-    "vitest": "3.1.2"
+    "typescript-eslint": "^8.32.1",
+    "vitest": "^3.1.4"
   },
   "homepage": "https://github.com/jaysonwu991/svgstore#readme",
   "repository": "jaysonwu991/svgstore",
